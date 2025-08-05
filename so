@@ -1,0 +1,102 @@
+import Head from "next/head";
+import { useState } from "react";
+
+export default function Home() {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+
+  const handleChange = (e) => {
+    if (!e?.target?.name) return;
+    setForm((prevForm) => ({ ...prevForm, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert("Thank you! We will contact you soon.");
+    setForm({ name: "", email: "", message: "" });
+  };
+
+  return (
+    <>
+      <Head>
+        <title>ClickMasters Digital - Social Media Marketing</title>
+        <meta name="description" content="Grow your brand with our expert social media marketing services." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+      <main className="min-h-screen bg-gray-50 text-gray-800 font-sans">
+        {/* Hero Section */}
+        <section className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-600 to-blue-500 text-white text-center p-6">
+          <div>
+            <h1 className="text-4xl md:text-6xl font-bold mb-4">Grow Your Brand with ClickMasters</h1>
+            <p className="text-lg md:text-xl mb-6">Social Media Marketing That Delivers Real Results</p>
+            <a href="#contact" className="bg-white text-blue-600 font-semibold py-3 px-6 rounded shadow hover:bg-gray-100 transition">Get Started</a>
+          </div>
+        </section>
+
+        {/* Services Section */}
+        <section className="py-20 px-6 bg-white">
+          <h2 className="text-3xl font-bold text-center mb-12">Our Services</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                title: "Social Media Management",
+                description: "Daily content, engagement, and audience growth across platforms."
+              },
+              {
+                title: "Paid Advertising",
+                description: "High-converting Facebook & Instagram ad campaigns tailored to your goals."
+              },
+              {
+                title: "Brand Strategy",
+                description: "We help you stand out with powerful branding and messaging strategies."
+              },
+            ].map((service, index) => (
+              <div key={index} className="p-6 bg-gray-100 rounded-xl shadow hover:shadow-lg transition">
+                <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                <p>{service.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Testimonials */}
+        <section className="py-20 px-6 bg-gray-100">
+          <h2 className="text-3xl font-bold text-center mb-12">What Our Clients Say</h2>
+          <div className="max-w-4xl mx-auto">
+            {[
+              {
+                text: "ClickMasters helped us grow our Instagram following by 500% in just 3 months!",
+                author: "Zara M., Fashion Brand Owner"
+              },
+              {
+                text: "We doubled our online sales thanks to their smart ad strategies.",
+                author: "Ali K., E-commerce Store"
+              },
+            ].map((testimonial, index) => (
+              <div key={index} className="bg-white p-6 rounded-xl shadow mb-6">
+                <p className="text-lg italic">"{testimonial.text}"</p>
+                <p className="mt-2 font-semibold text-right">— {testimonial.author}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section id="contact" className="py-20 px-6 bg-white text-center">
+          <h2 className="text-3xl font-bold mb-6">Let's Talk</h2>
+          <p className="mb-6 max-w-xl mx-auto">Want to scale your business using social media? Contact us today and we'll get back to you within 24 hours.</p>
+          <form onSubmit={handleSubmit} className="max-w-xl mx-auto space-y-4">
+            <input name="name" value={form.name} onChange={handleChange} required placeholder="Your Name" className="w-full p-3 border rounded" />
+            <input name="email" type="email" value={form.email} onChange={handleChange} required placeholder="Email Address" className="w-full p-3 border rounded" />
+            <textarea name="message" value={form.message} onChange={handleChange} required placeholder="Message" className="w-full p-3 border rounded" />
+            <button type="submit" className="bg-blue-600 text-white py-3 px-6 rounded font-semibold hover:bg-blue-700 transition">Send Message</button>
+          </form>
+        </section>
+
+        {/* Footer */}
+        <footer className="bg-gray-800 text-white text-center py-6">
+          <p>&copy; 2025 ClickMasters Digital Marketing Agency. All rights reserved.</p>
+        </footer>
+      </main>
+    </>
+  );
+}
